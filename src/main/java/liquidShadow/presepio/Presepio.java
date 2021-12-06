@@ -24,7 +24,7 @@ import liquidShadow.presepio.structure.Stelle;
 public class Presepio {
 
 	private static int hour = ConfigPresepio.BEGINHOUR;
-	private static boolean running = false;
+	private static boolean running = true;
 	
 	private static int daysGone = 0;
 	
