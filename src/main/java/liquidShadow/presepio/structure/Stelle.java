@@ -89,4 +89,11 @@ public class Stelle implements IchangeHourListener {
 		isShuning = false;
 	}
 
+	@Override
+	public void test() {
+		LOG.info("Test Stelle");
+		ledStar1.high();
+		ledStar2.high();
+	}
+
 }

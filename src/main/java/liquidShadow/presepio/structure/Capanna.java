@@ -119,4 +119,13 @@ public class Capanna implements IchangeHourListener {
 		isClosed = true;
 	}
 
+	@Override
+	public void test() {
+		LOG.info("Test Capanna");
+		ledCapanna.high();
+		SoftPwm.softPwmCreate(ConfigPresepio.LED_MANGIATOIA.getAddress(), 0, 100);
+		SoftPwm.softPwmWrite(ConfigPresepio.LED_MANGIATOIA.getAddress(), 100);
+		ledFallingStar.high();
+	}
+
 }

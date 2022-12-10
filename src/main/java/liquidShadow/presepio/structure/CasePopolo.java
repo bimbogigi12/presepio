@@ -1,5 +1,8 @@
 package liquidShadow.presepio.structure;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
@@ -12,6 +15,8 @@ public class CasePopolo implements IchangeHourListener {
 
 	GpioPinDigitalOutput ledCase = null;
 	GpioPinDigitalOutput ledCaseLontane = null;
+	
+	private static Logger LOG = LogManager.getLogger(CasePopolo.class);
 
 	public CasePopolo() {
 		final GpioController gpio = GpioFactory.getInstance();
@@ -35,6 +40,13 @@ public class CasePopolo implements IchangeHourListener {
 	public void ended() {
 		ledCase.low();
 		ledCaseLontane.high();
+	}
+
+	@Override
+	public void test() {
+		LOG.info("Test case popolo");
+		ledCase.high();
+		ledCaseLontane.low();
 	}
 
 }

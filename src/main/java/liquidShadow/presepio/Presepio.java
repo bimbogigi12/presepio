@@ -14,6 +14,7 @@ import com.pi4j.io.gpio.PinState;
 
 import liquidShadow.presepio.structure.Capanna;
 import liquidShadow.presepio.structure.CasePopolo;
+import liquidShadow.presepio.structure.Fiume;
 import liquidShadow.presepio.structure.Fuoco;
 import liquidShadow.presepio.structure.Pizzaiolo;
 import liquidShadow.presepio.structure.Ponte;
@@ -24,7 +25,7 @@ import liquidShadow.presepio.structure.Stelle;
 public class Presepio {
 
 	private static int hour = ConfigPresepio.BEGINHOUR;
-	private static boolean running = true;
+	private static boolean running = false;
 	
 	private static int daysGone = 0;
 	
@@ -34,6 +35,8 @@ public class Presepio {
 	
 	public static void main(String[] args) {
 
+		
+		
 		final GpioController gpio = GpioFactory.getInstance();
 		final GpioPinDigitalInput startButton = gpio.provisionDigitalInputPin(ConfigPresepio.buttonStartPosition, PinPullResistance.PULL_DOWN);
 		gpio.provisionDigitalOutputPin(ConfigPresepio.PIN_TEST, "PinLED", PinState.HIGH);
@@ -46,6 +49,14 @@ public class Presepio {
 		structures.add(new Sole());
 		structures.add(new Stelle());
 		structures.add(new Ponte());
+		structures.add(new Fiume());
+		
+		
+		if (args.length > 0) {
+			test();
+		}
+		
+		beginTime();
 		
 		while(true) {
 			
@@ -67,8 +78,24 @@ public class Presepio {
 			}
 		}
 	}
+	
+	private static void test() {
+		LOG.info("Start TEST");
+		for (IchangeHourListener struct: structures) {
+			struct.test();
+			try {
+				Thread.sleep(3000);
+			}catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			struct.ended();
+		}
+		
+		LOG.info("End TEST");
+	}
 
 	private static void beginTime() {
+		//test();
 		running = true;
 		LOG.info("Start Presepe");
 	}

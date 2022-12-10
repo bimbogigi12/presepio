@@ -7,8 +7,10 @@ import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinState;
+import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
 import com.pi4j.wiringpi.SoftPwm;
 
+import i2c.servo.PCA9685;
 import liquidShadow.presepio.ConfigPresepio;
 import liquidShadow.presepio.IchangeHourListener;
 
@@ -73,6 +75,13 @@ public class Sole implements IchangeHourListener {
 	@Override
 	public void ended() {
 		SoftPwm.softPwmWrite(ConfigPresepio.LED_SOLE.getAddress(), 0);
+	}
+
+	@Override
+	public void test() {
+		LOG.info("Test Sole");
+		SoftPwm.softPwmWrite(ConfigPresepio.LED_SOLE.getAddress(), 100);
+		
 	}
 
 }

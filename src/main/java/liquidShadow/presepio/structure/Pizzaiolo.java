@@ -93,5 +93,11 @@ private static Logger LOG = LogManager.getLogger(Pizzaiolo.class);
 		ledPizza.blink(0);
 		ledPizza.high();
 	}
+
+	@Override
+	public void test() {
+		LOG.info("Test Pizzaiolo");
+		ledPizza.low();
+	}
 	
 }

@@ -11,37 +11,39 @@ import com.pi4j.io.gpio.PinState;
 import liquidShadow.presepio.ConfigPresepio;
 import liquidShadow.presepio.IchangeHourListener;
 
-public class Ponte implements IchangeHourListener {
+public class Fiume implements IchangeHourListener{
 
-	GpioPinDigitalOutput ledPonte = null;
-
-	private static Logger LOG = LogManager.getLogger(Ponte.class);
+	private static Logger LOG = LogManager.getLogger(Fiume.class);
+	GpioPinDigitalOutput pinFiume = null;
 	
-	public Ponte() {
+	public Fiume() {
 		final GpioController gpio = GpioFactory.getInstance();
 
-		ledPonte = gpio.provisionDigitalOutputPin(ConfigPresepio.LED_PONTE, "PinLED", PinState.LOW);
+		pinFiume = gpio.provisionDigitalOutputPin(ConfigPresepio.PIN_FIUME, "PinLED", PinState.HIGH);		
 	}
 
+	
+	@Override
 	public void changedHour(int newHour) {
-		if ((newHour > 16 || newHour > 8) || ConfigPresepio.debug) {
-			ledPonte.high();
+		if (newHour <6 || newHour >14) {
+			LOG.info("Fiume on");
+			pinFiume.low();
 		} else {
-			ledPonte.low();
+			LOG.info("Fiume off");
+			pinFiume.high();
 		}
 	}
 
 	@Override
 	public void ended() {
-		ledPonte.low();
-
+		pinFiume.high();
+		
 	}
 
 	@Override
 	public void test() {
-		LOG.info("Test Ponte");
-		ledPonte.high();
-		
+		LOG.info("Test Fiume");
+		pinFiume.low();
 	}
 
 }

@@ -1,5 +1,8 @@
 package liquidShadow.presepio.structure;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
@@ -12,6 +15,8 @@ public class Pozzo implements IchangeHourListener {
 
 	GpioPinDigitalOutput pinPozzo = null;
 
+	private static Logger LOG = LogManager.getLogger(Pozzo.class);
+	
 	public Pozzo() {
 		final GpioController gpio = GpioFactory.getInstance();
 		pinPozzo = gpio.provisionDigitalOutputPin(ConfigPresepio.PIN_POZZO, "PinLED", PinState.HIGH);
@@ -33,6 +38,13 @@ public class Pozzo implements IchangeHourListener {
 		}
 		pinPozzo.high();
 
+	}
+
+	@Override
+	public void test() {
+		LOG.info("Test Pozzo");
+		pinPozzo.low();
+		
 	}
 
 }

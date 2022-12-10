@@ -93,4 +93,12 @@ public class Fuoco implements IchangeHourListener {
 		isBurning = false;
 	}
 
+	@Override
+	public void test() {
+		LOG.info("Test Fuoco");
+		pinFuocoFlat.high();
+		SoftPwm.softPwmCreate(ConfigPresepio.LED_FUOCO.getAddress(), 0, 100);
+		SoftPwm.softPwmWrite(ConfigPresepio.LED_FUOCO.getAddress(), 100);
+	}
+
 }

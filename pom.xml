@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>presopio</name>
+	<name>presepio</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -76,6 +76,10 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.13.3</version>
 		</dependency>
-
+		<dependency>
+			<groupId>oliv.raspi.pi4j</groupId>
+			<artifactId>I2C-SPI</artifactId>
+			<version>1.0</version>
+		</dependency>	
 	</dependencies>
 </project>
