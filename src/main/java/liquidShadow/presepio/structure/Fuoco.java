@@ -37,12 +37,15 @@ public class Fuoco implements IchangeHourListener {
 		Thread task = new Thread() {
 			@Override
 			public void run() {
-				if (!isBurning && currentHour >=18 && currentHour <23) {
-					isBurning = true;
-					letItBurn();
-					pinFuocoFlat.high();
-				} else {
+				if ( currentHour >=18 && currentHour <23) {
+
+					if (!isBurning) {
+						isBurning = true;
+						letItBurn();
+					}
 					pinFuocoFlat.low();
+				} else {
+					pinFuocoFlat.high();
 				} 
 			}
 		};
@@ -55,7 +58,7 @@ public class Fuoco implements IchangeHourListener {
 			try {
 				Random rand = new Random();
 				int blink = 120 + rand.nextInt(130);
-				//LOG.info("blink at: " + blink);
+				LOG.info("blink at: " + blink);
 				ledFuoco.blink(blink);
 				Thread.sleep(1000);
 				
@@ -91,14 +94,21 @@ public class Fuoco implements IchangeHourListener {
 		ledFuoco.low();
 		pinFuocoFlat.high();
 		isBurning = false;
+		try {
+			shutDownFire();
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public void test() {
 		LOG.info("Test Fuoco");
-		pinFuocoFlat.high();
-		SoftPwm.softPwmCreate(ConfigPresepio.LED_FUOCO.getAddress(), 0, 100);
-		SoftPwm.softPwmWrite(ConfigPresepio.LED_FUOCO.getAddress(), 100);
+		pinFuocoFlat.low();
+		Random rand = new Random();
+		int blink = 120 + rand.nextInt(130);
+		//LOG.info("blink at: " + blink);
+		ledFuoco.blink(blink);
 	}
 
 }

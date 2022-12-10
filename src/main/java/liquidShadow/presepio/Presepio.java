@@ -46,7 +46,7 @@ public class Presepio {
 		structures.add(new Fuoco());
 		structures.add(new Pizzaiolo());
 		structures.add(new CasePopolo());
-		structures.add(new Sole());
+		//structures.add(new Sole());
 		structures.add(new Stelle());
 		structures.add(new Ponte());
 		structures.add(new Fiume());

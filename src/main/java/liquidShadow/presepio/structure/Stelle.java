@@ -55,13 +55,12 @@ public class Stelle implements IchangeHourListener {
 			try {
 				Random rand = new Random();
 				int blink1 = minBlink + rand.nextInt(minBlink/2);
-				// LOG.info("blink at: " + blink);
+				 LOG.info("blink at: " + blink1);
 				ledStar1.blink(blink1);
 				int blink2 = minBlink + rand.nextInt(minBlink/2);
 				ledStar2.blink(blink2);
 				Thread.sleep(Math.max(blink1, blink2) + minBlink);
 
-				// shutDownFire();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

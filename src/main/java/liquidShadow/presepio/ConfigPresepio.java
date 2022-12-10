@@ -5,7 +5,7 @@ import com.pi4j.io.gpio.RaspiPin;
 
 public class ConfigPresepio {
 	public static int BEGINHOUR = 7;
-	public static int WAIT_TIME_FOR_HOUR = 1000*5;
+	public static int WAIT_TIME_FOR_HOUR = 1000*4;
 	public static int SUNRISE = 6;
 	public static int SUNSET = 18;
 	public static boolean debug = false;
