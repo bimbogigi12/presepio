@@ -25,7 +25,7 @@ public class Fiume implements IchangeHourListener{
 	
 	@Override
 	public void changedHour(int newHour) {
-		if (newHour <6 || newHour >14) {
+		if ( newHour % 2 == 0/*newHour <6 || newHour >14*/) {
 			LOG.info("Fiume on");
 			pinFiume.low();
 		} else {
