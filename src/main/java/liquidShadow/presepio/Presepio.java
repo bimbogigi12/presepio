@@ -1,6 +1,8 @@
 package liquidShadow.presepio;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -19,7 +21,6 @@ import liquidShadow.presepio.structure.Fuoco;
 import liquidShadow.presepio.structure.Pizzaiolo;
 import liquidShadow.presepio.structure.Ponte;
 import liquidShadow.presepio.structure.Pozzo;
-import liquidShadow.presepio.structure.Sole;
 import liquidShadow.presepio.structure.Stelle;
 
 public class Presepio {
@@ -52,13 +53,15 @@ public class Presepio {
 		structures.add(new Fiume());
 		
 		
-		if (args.length > 0) {
+		if (args.length > 0 && "1".equals(args[0])) {
 			test();
 		}
 		
 		beginTime();
 		
 		while(true) {
+			
+			itsCrhistmasTime();
 			
 			if (startButton.getState().isHigh() && !running) {
 				beginTime();		
@@ -76,6 +79,26 @@ public class Presepio {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private static void itsCrhistmasTime() {
+		Calendar cal = new GregorianCalendar();
+		boolean isChristmasDay = cal.get(Calendar.DAY_OF_MONTH) == 25;
+		
+		int hour = cal.get(Calendar.HOUR);
+		int minute = cal.get(Calendar.MINUTE);
+		
+		if (hour > 12 && hour < 20 && !running) {
+			if (minute % 10 == 0 && isChristmasDay) {
+				beginTime();
+			} else {
+				if(minute == 00 || minute == 30) {
+					beginTime();	
+				}	
+			}
+			
+			
 		}
 	}
 	
